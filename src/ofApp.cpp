@@ -52,9 +52,6 @@ void ofApp::setup() {
 	
     // setup of sound stream
     ofSoundStreamSetup(numOutputs, numInputs, this, sampleRate, bufferSize, nBuffers);
-    
-    inputDevices = soundstream.getMatchingDevices("", 2, 0);
-    outputDevices = soundstream.getMatchingDevices("", 0, 2);
 	
     // setup pd
 	if(!pd.init(numOutputs, numInputs, sampleRate, ticksPerBuffer)) {
@@ -73,24 +70,10 @@ void ofApp::setup() {
 	cout << patch << endl;
 
     // gui
-    guiGroup.setup();
-    guiGroup.setName("Monitor");
-    guiGroup.setPosition(792, 20);
+    gui.setup();
     
-    guiGroup.add(pitchDetect.set("Pitch Detect"));
-    
-    guiGroup.add(midiPitch.set("Midi Pitch", 0, 0, 128));
-    guiGroup.add(pitchConfidence.set("Confidence", 0, 0, 1));
-    guiGroup.add(confidence.set("confidence level", 0.64, 0, 1));
-    
-    guiGroup.add(pitchShift.set("Pitch Shift"));
-    
-    guiGroup.add(transpose.set("Transpose", 0, -1, 1));
-    guiGroup.add(mix.set("Wet/Dry Mix", 1, 0, 1));
-    guiGroup.add(inGain.set("Input Gain", 0.5, 0, 1));
-    guiGroup.add(outGain.set("Output Gain", 0.5, 0, 1));
-    
-    
+    gui.inputDevices = soundstream.getMatchingDevices("", 2, 0);
+    gui.outputDevices = soundstream.getMatchingDevices("", 0, 2);
     
     ofEnableAlphaBlending();
 }
@@ -101,12 +84,12 @@ void ofApp::update() {
 	pd.readArray("scope", scopeArray);
 	
 	// update pd from gui
-    pd << StartMessage() << "transpose" << transpose.get() << FinishList("TO_PD");
-    pd << StartMessage() << "mix" << mix.get() << FinishList("TO_PD");
-    pd << StartMessage() << "inGain" << inGain.get() << FinishList("TO_PD");
-    pd << StartMessage() << "outGain" << outGain.get() << FinishList("TO_PD");
+    pd << StartMessage() << "transpose" << gui.transpose.get() << FinishList("TO_PD");
+    pd << StartMessage() << "mix" << gui.mix.get() << FinishList("TO_PD");
+    pd << StartMessage() << "inGain" << gui.inGain.get() << FinishList("TO_PD");
+    pd << StartMessage() << "outGain" << gui.outGain.get() << FinishList("TO_PD");
     
-    ofLog() << transpose;
+    ofLog() << gui.transpose;
 }
 
 //--------------------------------------------------------------
@@ -134,37 +117,37 @@ void ofApp::draw() {
     
     ofSetColor(255);
     
-    pitchConfidence = pitch.pitchConfidence;
+    gui.pitchConfidence = pitch.pitchConfidence;
     
     if (pitch.latestPitch) {
-        midiPitch = pitch.latestPitch;
+        gui.midiPitch = pitch.latestPitch;
         
-        if (pitchConfidence >= confidence.get()) {
-            string note = midiToNote(round(midiPitch));
+        if (gui.pitchConfidence >= gui.confidence.get()) {
+            string note = midiToNote(round(gui.midiPitch));
             
-            if (latestNote != note) latestNote = note;
+            if (latestNote != note) {
+                latestNote = note;
+            }
         }
     };
     
     ofDrawBitmapString("Current Note: " + latestNote, 32, 64);
     
-    ofDrawBitmapString("Current Note: " + latestNote, 32, 64);
-    
     // draw gui
     
-    guiGroup.draw();
+    gui.render();
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key) {
     if (key == 's') {
-        settings.serialize(parameters);
+        settings.serialize(gui.parameters);
         settings.save("settings.xml");
     }
     
     if (key == 'l') {
         settings.load("settings.xml");
-        settings.deserialize(parameters);
+        settings.deserialize(gui.parameters);
     }
 }
 

@@ -27,7 +27,6 @@
 
 #include "ofxPd.h"
 #include "ofxAubio.h"
-#include "ofxGui.h"
 
 #include "GuiRenderer.h"
 
@@ -58,9 +57,6 @@ class ofApp : public ofBaseApp, public PdReceiver {
 		// audio callbacks
         ofSoundStream soundstream;
     
-        vector<ofSoundDevice> inputDevices;
-        vector<ofSoundDevice> outputDevices;
-    
 		void audioReceived(float * input, int bufferSize, int nChannels);
 		void audioRequested(float * output, int bufferSize, int nChannels);
     
@@ -72,19 +68,8 @@ class ofApp : public ofBaseApp, public PdReceiver {
 
 		// gui
         GuiRenderer gui;
-    
-        ofxGuiGroup guiGroup;
-    
-        ofParameterGroup parameters;
-        ofParameter<string> pitchDetect, pitchShift;
-    
-        ofParameter<float> midiPitch, pitchConfidence;
-        ofParameter<float> transpose, mix, inGain, outGain;
-    
-        ofParameter<float> confidence;
-    
+
         ofXml settings;
-    
     
         // aubio pitch detection / note conversion
         ofxAubioPitch pitch;
