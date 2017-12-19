@@ -19,16 +19,15 @@
 
 #pragma once
 
-#include "ofMain.h"
-
-#include "ofxPd.h"
-#include "ofxSimpleSlider.h"
-#include "ofxAubio.h"
-#include "ofxGui.h"
-
 #include <string>
 #include <map>
 #include <tuple>
+
+#include "ofMain.h"
+
+#include "ofxPd.h"
+#include "ofxAubio.h"
+#include "ofxGui.h"
 
 // a namespace for the Pd types
 using namespace pd;
