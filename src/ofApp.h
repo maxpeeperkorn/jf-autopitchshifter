@@ -27,7 +27,7 @@
 
 #include "ofxPd.h"
 #include "ofxAubio.h"
-
+#include "ofxDatGui.h"
 #include "GuiRenderer.h"
 
 // a namespace for the Pd types

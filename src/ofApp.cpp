@@ -70,10 +70,7 @@ void ofApp::setup() {
 	cout << patch << endl;
 
     // gui
-    gui.setup();
-    
-    gui.inputDevices = soundstream.getMatchingDevices("", 2, 0);
-    gui.outputDevices = soundstream.getMatchingDevices("", 0, 2);
+    gui.setup(soundstream); // inputs, outputs
     
     ofEnableAlphaBlending();
 }
@@ -90,6 +87,8 @@ void ofApp::update() {
     pd << StartMessage() << "outGain" << gui.outGain.get() << FinishList("TO_PD");
     
     ofLog() << gui.transpose;
+    
+    gui.update();
 }
 
 //--------------------------------------------------------------
