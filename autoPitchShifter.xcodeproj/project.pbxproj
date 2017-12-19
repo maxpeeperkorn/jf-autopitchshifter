@@ -35,6 +35,7 @@
 		49C1EFD45F6BB2292E09D84D /* d_osc.c in Sources */ = {isa = PBXBuildFile; fileRef = F27EC6FE253F687FADCA4055 /* d_osc.c */; };
 		4C7BC3489171413574CC398B /* PdBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0BBB709C1538C828C1BC70FB /* PdBase.cpp */; };
 		509B64A21FDEE57D0046D461 /* aubio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 509B64A11FDEE57D0046D461 /* aubio.framework */; };
+		50E70E991FE94CF9006CC4DF /* GuiRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50E70E971FE94CF9006CC4DF /* GuiRenderer.cpp */; };
 		50F096CFDBAD1EC45E92416E /* m_atom.c in Sources */ = {isa = PBXBuildFile; fileRef = BB7AD905C0E049138E942045 /* m_atom.c */; };
 		5472CCBDC7B6C1AF21661319 /* s_main.c in Sources */ = {isa = PBXBuildFile; fileRef = F96600F815252113425D4E74 /* s_main.c */; };
 		5CBB2AB3A60F65431D7B555D /* ofxButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C88333E71C9457E441C33474 /* ofxButton.cpp */; };
@@ -192,6 +193,8 @@
 		4B17A983E507AB0B3F71A2D6 /* ofxAubioBlock.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxAubioBlock.h; path = ../../../addons/ofxAubio/src/ofxAubioBlock.h; sourceTree = SOURCE_ROOT; };
 		4BE14A515B465F9F94740B1E /* x_midi.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 30; name = x_midi.c; path = "../../../addons/ofxPd/libs/libpd/pure-data/src/x_midi.c"; sourceTree = SOURCE_ROOT; };
 		509B64A11FDEE57D0046D461 /* aubio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = aubio.framework; path = frameworks/aubio.framework; sourceTree = "<group>"; };
+		50E70E961FE94CE9006CC4DF /* GuiRenderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GuiRenderer.h; sourceTree = "<group>"; };
+		50E70E971FE94CF9006CC4DF /* GuiRenderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GuiRenderer.cpp; sourceTree = "<group>"; };
 		515E593073CA88F62A0C63DE /* s_audio.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 30; name = s_audio.c; path = "../../../addons/ofxPd/libs/libpd/pure-data/src/s_audio.c"; sourceTree = SOURCE_ROOT; };
 		51D837462D91A0E2799F53D4 /* x_gui.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 30; name = x_gui.c; path = "../../../addons/ofxPd/libs/libpd/pure-data/src/x_gui.c"; sourceTree = SOURCE_ROOT; };
 		524BC63EACFB3776086FD775 /* x_libpdreceive.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 30; name = x_libpdreceive.c; path = ../../../addons/ofxPd/libs/libpd/libpd_wrapper/x_libpdreceive.c; sourceTree = SOURCE_ROOT; };
@@ -685,6 +688,8 @@
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */,
 				E4B69E1F0A3A1BDC003C02F2 /* ofApp.h */,
+				50E70E971FE94CF9006CC4DF /* GuiRenderer.cpp */,
+				50E70E961FE94CE9006CC4DF /* GuiRenderer.h */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -863,6 +868,7 @@
 				7B2651CDC15D43638F6D2807 /* g_bang.c in Sources */,
 				49C1EFD45F6BB2292E09D84D /* d_osc.c in Sources */,
 				4112DA22A38568E370255F1E /* d_delay.c in Sources */,
+				50E70E991FE94CF9006CC4DF /* GuiRenderer.cpp in Sources */,
 				11EA274EF34B86E9D63C3EBD /* g_vslider.c in Sources */,
 				660D59CA6EF233EBCBCD8EFA /* s_loader.c in Sources */,
 				43E7F9BCBED7CD0D3427F707 /* s_audio_dummy.c in Sources */,

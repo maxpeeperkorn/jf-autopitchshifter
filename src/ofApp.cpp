@@ -73,22 +73,22 @@ void ofApp::setup() {
 	cout << patch << endl;
 
     // gui
-    gui.setup();
-    gui.setName("Monitor");
-    gui.setPosition(792, 20);
+    guiGroup.setup();
+    guiGroup.setName("Monitor");
+    guiGroup.setPosition(792, 20);
     
-    gui.add(pitchDetect.set("Pitch Detect"));
+    guiGroup.add(pitchDetect.set("Pitch Detect"));
     
-    gui.add(midiPitch.set("Midi Pitch", 0, 0, 128));
-    gui.add(pitchConfidence.set("Confidence", 0, 0, 1));
-    gui.add(confidence.set("confidence level", 0.64, 0, 1));
+    guiGroup.add(midiPitch.set("Midi Pitch", 0, 0, 128));
+    guiGroup.add(pitchConfidence.set("Confidence", 0, 0, 1));
+    guiGroup.add(confidence.set("confidence level", 0.64, 0, 1));
     
-    gui.add(pitchShift.set("Pitch Shift"));
+    guiGroup.add(pitchShift.set("Pitch Shift"));
     
-    gui.add(transpose.set("Transpose", 0, -1, 1));
-    gui.add(mix.set("Wet/Dry Mix", 1, 0, 1));
-    gui.add(inGain.set("Input Gain", 0.5, 0, 1));
-    gui.add(outGain.set("Output Gain", 0.5, 0, 1));
+    guiGroup.add(transpose.set("Transpose", 0, -1, 1));
+    guiGroup.add(mix.set("Wet/Dry Mix", 1, 0, 1));
+    guiGroup.add(inGain.set("Input Gain", 0.5, 0, 1));
+    guiGroup.add(outGain.set("Output Gain", 0.5, 0, 1));
     
     
     
@@ -152,7 +152,7 @@ void ofApp::draw() {
     
     // draw gui
     
-    gui.draw();
+    guiGroup.draw();
 }
 
 //--------------------------------------------------------------

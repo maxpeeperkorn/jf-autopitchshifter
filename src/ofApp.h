@@ -29,6 +29,8 @@
 #include "ofxAubio.h"
 #include "ofxGui.h"
 
+#include "GuiRenderer.h"
+
 // a namespace for the Pd types
 using namespace pd;
 
@@ -69,7 +71,9 @@ class ofApp : public ofBaseApp, public PdReceiver {
 		vector<float> scopeArray;
 
 		// gui
-        ofxGuiGroup gui;
+        GuiRenderer gui;
+    
+        ofxGuiGroup guiGroup;
     
         ofParameterGroup parameters;
         ofParameter<string> pitchDetect, pitchShift;
