@@ -19,6 +19,8 @@
 
 #include "ofApp.h"
 
+#include <string>
+
 //--------------------------------------------------------------
 void ofApp::setup() {
 	ofSetFrameRate(60);
@@ -68,6 +70,10 @@ void ofApp::setup() {
 	// open patch
 	Patch patch = pd.openPatch("pd/_main.pd");
 	cout << patch << endl;
+    
+    // midi setup
+    
+    midi.setup();
 
     // gui
     gui.setup(soundstream); // inputs, outputs
@@ -86,16 +92,12 @@ void ofApp::update() {
     pd << StartMessage() << "inGain" << gui.inGain.get() << FinishList("TO_PD");
     pd << StartMessage() << "outGain" << gui.outGain.get() << FinishList("TO_PD");
     
-    ofLog() << gui.transpose;
-    
     gui.update();
 }
 
 //--------------------------------------------------------------
 void ofApp::draw() {
     ofSetColor(225);
-    ofDrawBitmapString("JAN FOOTE VARIABLE AUTO PITCHSHIFTER", 32, 32);
-    
     ofNoFill();
 	
     // draw scope
@@ -122,15 +124,24 @@ void ofApp::draw() {
         gui.midiPitch = pitch.latestPitch;
         
         if (gui.pitchConfidence >= gui.confidence.get()) {
-            string note = midiToNote(round(gui.midiPitch));
+            int midiNumber = clamp(round(gui.midiPitch), midi.midiMap.begin()->first, midi.midiMap.end()->first); // clamp to prevent selecting undefined notes, quick 'n dirty
+        
+            string note = midi.getNotePitchName(midiNumber);
+            float transposition = midi.getNoteTransposition(midiNumber);
+    
+            if (midi.latestNote != note) {
+                midi.latestNote = note;
+            }
             
-            if (latestNote != note) {
-                latestNote = note;
+            if (midi.latestTransposition != transposition && transposition != 0) {
+                midi.latestTransposition = transposition;
             }
         }
     };
     
-    ofDrawBitmapString("Current Note: " + latestNote, 32, 64);
+    ofDrawBitmapString("Current Note: " + midi.latestNote, 32, 32);
+    
+    gui.transpose = midi.latestTransposition;
     
     // draw gui
     
@@ -172,52 +183,15 @@ void ofApp::print(const std::string& message) {
 	cout << message << endl;
 }
 
-//--------------------------------------------------------------
-string ofApp::midiToNote(int midi) {
-    string noteName;
-    int mod = midi % 12;
-    
-    switch (mod){
-        case 0:
-            noteName = "C";
-            break;
-        case 1:
-            noteName = "C#";
-            break;
-        case 2:
-            noteName = "D";
-            break;
-        case 3:
-            noteName = "D#";
-            break;
-        case 4:
-            noteName = "E";
-            break;
-        case 5:
-            noteName = "F";
-            break;
-        case 6:
-            noteName = "F#";
-            break;
-        case 7:
-            noteName = "G";
-            break;
-        case 8:
-            noteName = "G#";
-            break;
-        case 9:
-            noteName = "A";
-            break;
-        case 10:
-            noteName = "Bb";
-            break;
-        case 11:
-            noteName = "B";
-            break;
-        default:
-            break;
-    }
-    
-    return (noteName);
+int ofApp::clamp(int n, int lower, int upper) {
+    return std::max(lower, std::min(n, upper));
+//    if (n < min) {
+//        return min;
+//    }
+//    else if (n > max) {
+//        return max;
+//    }
+//    else {
+//        return n;
+//    }
 }
-

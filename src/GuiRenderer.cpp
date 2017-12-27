@@ -8,6 +8,8 @@
 #include "GuiRenderer.h"
 
 void GuiRenderer::setup(ofSoundStream soundstream) {
+    soundstream = soundstream;
+    
     inputDevices = soundstream.getMatchingDevices("", 2, 0);
     outputDevices = soundstream.getMatchingDevices("", 0, 2);
     
@@ -23,7 +25,7 @@ void GuiRenderer::setup(ofSoundStream soundstream) {
     
     guiGroup.add(midiPitch.set("Midi Pitch", 0, 0, 128));
     guiGroup.add(pitchConfidence.set("Confidence", 0, 0, 1));
-    guiGroup.add(confidence.set("confidence level", 0.64, 0, 1));
+    guiGroup.add(confidence.set("Confidence Level", 0.64, 0, 1));
     
     // -- Pitch Shifting Variables
     
@@ -37,11 +39,12 @@ void GuiRenderer::setup(ofSoundStream soundstream) {
     // -- Input / Output Variables
     
     inputDevicesMenu = new ofxDatGuiDropdown("Inputs", listSoundDevicesByName(inputDevices));
-    inputDevicesMenu->setPosition(32, 288);
-    inputDevicesMenu->onDropdownEvent(this, &GuiRenderer::onDropdownEvent);
+    inputDevicesMenu->setPosition(32, 48);
+    inputDevicesMenu->onDropdownEvent(this, &GuiRenderer::onDropdownInputsEvent);
     
     outputDevicesMenu = new ofxDatGuiDropdown("Outputs", listSoundDevicesByName(outputDevices));
-    outputDevicesMenu->setPosition(332, 288);
+    outputDevicesMenu->setPosition(316, 48);
+    outputDevicesMenu->onDropdownEvent(this, &GuiRenderer::onDropdownOutputsEvent);
 }
 void GuiRenderer::update() {
     inputDevicesMenu->update();
@@ -66,12 +69,15 @@ vector<string> GuiRenderer::listSoundDevicesByName(vector<ofSoundDevice> soundDe
     return soundDevicesByName;
 }
 //
-//void GuiRenderer::onDropdownInputDevicesEvent(ofxDatGuiDropdownEvent e) {
-//    soundstream.setInput(inputDevices[e.child]);
-//}
-//
-//void GuiRenderer::onDropdownOutputDevicesEvent(ofxDatGuiDropdownEvent e) {
-//    soundstream.setOutput(outputDevices[e.child]);
-//}
+void GuiRenderer::onDropdownInputsEvent(ofxDatGuiDropdownEvent e) {
+    ofLog() << e.child;
+    
+    soundstream.setDevice(inputDevices[e.child]);
+}
+
+void GuiRenderer::onDropdownOutputsEvent(ofxDatGuiDropdownEvent e) {
+    ofLog() << e.child;
+    soundstream.setDevice(outputDevices[e.child]);
+}
 
 

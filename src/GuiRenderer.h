@@ -38,8 +38,8 @@ class GuiRenderer {
         vector<string> listSoundDevicesByName(vector<ofSoundDevice> soundDevices);
         ofSoundDevice getSoundDeviceByName(vector<ofSoundDevice> soundDevices, string deviceName);
     
-        void onDropdownEvent(ofxDatGuiDropdownEvent e);
-    
+        void onDropdownInputsEvent(ofxDatGuiDropdownEvent e);
+        void onDropdownOutputsEvent(ofxDatGuiDropdownEvent e);
 };
 
 

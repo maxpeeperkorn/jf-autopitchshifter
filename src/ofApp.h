@@ -19,9 +19,7 @@
 
 #pragma once
 
-#include <string>
-#include <map>
-#include <tuple>
+#include <algorithm>
 
 #include "ofMain.h"
 
@@ -29,13 +27,10 @@
 #include "ofxAubio.h"
 #include "ofxDatGui.h"
 #include "GuiRenderer.h"
+#include "Midi.h"
 
 // a namespace for the Pd types
 using namespace pd;
-
-typedef std::tuple<string, float> midiValue;
-typedef std::map<int, string> tMidiMap;
-typedef std::pair<int, midiValue> tMidiPair;
 
 class ofApp : public ofBaseApp, public PdReceiver {
 
@@ -63,7 +58,7 @@ class ofApp : public ofBaseApp, public PdReceiver {
 		// pd message receiver callbacks
 		void print(const std::string& message);
 		
-		ofxPd pd;	//< pd instance
+		ofxPd pd;	// < pd instance
 		vector<float> scopeArray;
 
 		// gui
@@ -72,10 +67,12 @@ class ofApp : public ofBaseApp, public PdReceiver {
         ofXml settings;
     
         // aubio pitch detection / note conversion
-        ofxAubioPitch pitch;
     
-        string midiToNote(int midi);
+        ofxAubioPitch pitch;
+        Midi midi;
+    
         string latestNote;
     
-        tMidiMap midiMap;
+    
+        int clamp(int n, int lower, int upper);
 };
