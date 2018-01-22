@@ -31,15 +31,6 @@ class GuiRenderer {
         ofParameter<float> midiPitch, pitchConfidence;
         ofParameter<float> transpose, mix, inGain, outGain;
         ofParameter<float> confidence;
-    
-        ofxDatGuiDropdown* inputDevicesMenu;
-        ofxDatGuiDropdown* outputDevicesMenu;
-    
-        vector<string> listSoundDevicesByName(vector<ofSoundDevice> soundDevices);
-        ofSoundDevice getSoundDeviceByName(vector<ofSoundDevice> soundDevices, string deviceName);
-    
-        void onDropdownInputsEvent(ofxDatGuiDropdownEvent e);
-        void onDropdownOutputsEvent(ofxDatGuiDropdownEvent e);
 };
 
 

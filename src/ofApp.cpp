@@ -91,8 +91,6 @@ void ofApp::update() {
     pd << StartMessage() << "mix" << gui.mix.get() << FinishList("TO_PD");
     pd << StartMessage() << "inGain" << gui.inGain.get() << FinishList("TO_PD");
     pd << StartMessage() << "outGain" << gui.outGain.get() << FinishList("TO_PD");
-    
-    gui.update();
 }
 
 //--------------------------------------------------------------
@@ -127,6 +125,9 @@ void ofApp::draw() {
             int midiNumber = clamp(round(gui.midiPitch), midi.midiMap.begin()->first, midi.midiMap.end()->first); // clamp to prevent selecting undefined notes, quick 'n dirty
         
             string note = midi.getNotePitchName(midiNumber);
+            
+            ofLog() << note;
+            
             float transposition = midi.getNoteTransposition(midiNumber);
     
             if (midi.latestNote != note) {
@@ -138,6 +139,8 @@ void ofApp::draw() {
             }
         }
     };
+    
+    ofLog() << midi.latestNote;
     
     ofDrawBitmapString("Current Note: " + midi.latestNote, 32, 32);
     
