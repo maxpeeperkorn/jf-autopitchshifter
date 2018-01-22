@@ -54,6 +54,7 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
-/bin/*.app
+bin/*
+!bin/data/
 
 
