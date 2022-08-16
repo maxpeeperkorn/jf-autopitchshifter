@@ -1,4 +1,5 @@
-Jan Foote — AutoPitchShifter
+
+AutoPitchShifter
 ============
 
 Based on Pitchfter by Dan Wilcox.
